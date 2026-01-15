@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vortex Studio | Manager Final</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-15.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="loading-screen" class="screen">
+        <div class="loader-content">
+            <img src="VORTEX_STUDIOS_2.WEBP" class="vs-logo-glow">
+            <h1 class="glow-text">VORTEX STUDIO</h1>
+            <div class="progress-container"><div id="bar"></div></div>
+            <p id="status-text">INITIALIZING...</p>
+        </div>
+    </div>
+
+    <div id="login-screen" class="screen hidden">
+        <div class="login-card">
+            <img src="VORTEX_STUDIOS_2.WEBP" class="login-logo">
+            <h2>SYSTEM ACCESS</h2>
+            <div id="auth-msg"></div>
+            <div class="form-group">
+                <input type="text" id="username" placeholder="Username" autocomplete="off">
+                <input type="password" id="password" placeholder="Password">
+            </div>
+            <button onclick="authLogin()" class="btn-neon">AUTHORIZE</button>
+        </div>
+    </div>
+
+    <div id="dashboard-screen" class="dash-layout hidden">
+        <aside class="sidebar">
+            <div class="side-top">
+                <img src="VORTEX_STUDIOS_2.WEBP" width="60">
+                <p>VORTEX PANEL</p>
+            </div>
+            <nav class="side-nav">
+                <button class="nav-btn active" onclick="switchTab('home')">🏠 Home</button>
+                <button class="nav-btn" onclick="switchTab('whitelist')">🆔 Whitelist</button>
+                <button id="nav-pending" class="nav-btn hidden" onclick="switchTab('pending')">⏳ Approval</button>
+            </nav>
+            <div class="side-bottom">
+                <p id="role-tag">Role: Guest</p>
+                <button onclick="location.reload()" class="btn-logout">DISCONNECT</button>
+            </div>
+        </aside>
+
+        <main class="content">
+            <section id="tab-home" class="tab-view active">
+                <h1 class="welcome-text">WELCOME, <span id="user-welcome">USER</span></h1>
+                <div class="stat-grid">
+                    <div class="card"><h3>DATABASE</h3><p style="color:#00ff88">STABLE</p></div>
+                    <div class="card"><h3>STATUS</h3><p id="current-status">ONLINE</p></div>
+                </div>
+            </section>
+
+            <section id="tab-whitelist" class="tab-view">
+                <h2>MANAGEMENT</h2>
+                <div class="glass-input">
+                    <select id="wl-type">
+                        <option value="USER ID">👤 User ID</option>
+                        <option value="GROUP ID">👨‍👩‍👧‍👦 Group ID</option>
+                        <option value="COMMUNITY">🌐 Community</option>
+                    </select>
+                    <input type="text" id="target-id" placeholder="Enter ID / Name">
+                    <button onclick="handleAddWL()" class="btn-cyan">SUBMIT DATA</button>
+                    <p id="wl-notif"></p>
+                </div>
+            </section>
+
+            <section id="tab-pending" class="tab-view">
+                <h2>PENDING REQUESTS</h2>
+                <div id="pending-container" class="scroll-list">
+                    <p style="color:#444">No pending requests found.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="music-toggle" onclick="toggleMusic()">
+        <span id="m-icon">🔇</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
