@@ -15,20 +15,25 @@ app.get('/api/check', async (req, res) => {
     if (whitelistDB.includes(id)) {
         res.json({ allowed: true });
     } else {
-        // Send to Discord
-        await axios.post(WEBHOOK_NON_WL, {
-            embeds: [{
-                title: "🚫 NON-WHITELIST KICKED",
-                color: 16711680,
-                fields: [
-                    { name: "Username", value: `[${user}](https://www.roblox.com/users/${id})` },
-                    { name: "Map Info", value: `[${map}](${maplink})` }
-                ],
-                footer: { text: "Security by VS CEO" }
-            }]
-        });
+        try {
+            // Send to Discord
+            await axios.post(WEBHOOK_NON_WL, {
+                embeds: [{
+                    title: "🚫 NON-WHITELIST KICKED",
+                    color: 16711680,
+                    fields: [
+                        { name: "Username", value: `[${user}](https://www.roblox.com/users/${id})` },
+                        { name: "Map Info", value: `[${map}](${maplink})` }
+                    ],
+                    footer: { text: "Security by VS CEO" }
+                }]
+            });
+        } catch (error) {
+            console.error("Webhook Error:", error);
+        }
         res.json({ allowed: false });
     }
 });
 
-app.listen(3000, () => console.log("Vortex API Server Online"));
+// WAJIB UNTUK VERCEL: Ekspor app, jangan pakai app.listen
+module.exports = app;
