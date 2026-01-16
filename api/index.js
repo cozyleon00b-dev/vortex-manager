@@ -31,4 +31,4 @@ app.get('/api/check', async (req, res) => {
     }
 });
 
-app.listen(3000, () => console.log("Vortex API Server Online"));
+module.exports = app;
